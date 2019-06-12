@@ -1,15 +1,3 @@
-/**
- * risolvere problema:
- * The Tomcat connector configured to listen on port 8080 failed to start.
- *  The port may already be in use or the connector may be misconfigured.
- *  
- *  altrimenti digitare su riga di comando (windows)
- *  netstat -ano | find "8080"
- *  trovare il numero del processo che la sta utilizzando e 
- *  taskkill /f /PID numero del processo
- * 
- */
-
 package comuneprogetto;
 
 import java.io.*;
@@ -37,15 +25,15 @@ public class Download {
 			openConnection.addRequestProperty("User-Agent", "Google Chrome");	//Con l'utente "User-Agent" e "Google Chrome"
 			//System.setProperty("http.agent", "Chrome"); //evita errore java.io.IOException: Server returned HTTP response code: 403 for URL
 			InputStream PrendiDati = openConnection.getInputStream();					//Raccoglie il flusso dei dati
-		
+			
 			 try {
-			   InputStreamReader LeggiDati = new InputStreamReader( PrendiDati ); 
-			   BufferedReader Buffer = new BufferedReader( LeggiDati );		//Grazie a buffer read legge il flusso dei dati
+			  	 InputStreamReader LeggiDati = new InputStreamReader( PrendiDati ); 
+				 BufferedReader Buffer = new BufferedReader( LeggiDati );		//Grazie a buffer read legge il flusso dei dati
 			   														//e li mette dentro a line che va ad incrementare
-			   while ( ( line = Buffer.readLine() ) != null ) {		//data in questo ciclo while
-				   data+= line;
+				 while ( ( line = Buffer.readLine() ) != null ) {		//data in questo ciclo while
+					 data+= line;
 				  // System.out.println( "Contenuto del JSON: " +line );	//Nel caso vorresti vedere tutto il JSON in riga
-			   }
+				 }
 			 } finally {
 				 PrendiDati.close();		//dopo aver raccolto tutti i dati chiude il flusso
 			 }

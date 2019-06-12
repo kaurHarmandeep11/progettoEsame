@@ -13,6 +13,7 @@ public class Handler { //handling incoming web requests
 	String home() {  
 		return "Hello World!";  //viene visualizzato in localhost:8080 sul browser
 	}
+	
 	//aggiungere visualizzare il file in formato JSON
 
 }
