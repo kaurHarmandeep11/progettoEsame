@@ -1,5 +1,4 @@
 package comuneprogetto;
-
 public class LocaleMilano {
 	private int ID_NLS;
 	private String RIC;
@@ -55,7 +54,6 @@ public class LocaleMilano {
 	public double getgeo_x() {
 		return geo_x;
 	}
-	
 /*	public String getlocation() {
 		//?se serve unire i double in uno string?
 	}*/

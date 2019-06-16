@@ -2,6 +2,9 @@ package comuneprogetto;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+//import org.springframework.web.bind.annotation.GetMapping;
+
+//import com.google.gson.Gson;
 
 @SpringBootApplication
 public class ProgettoV01Application {
@@ -12,7 +15,8 @@ public class ProgettoV01Application {
 		String NomeFile = "Negozi_e_locali_storici_di_milano.csv";
 		
 		new Download(url,NomeFile); 
-		new CreaOggetti(NomeFile); 
+		//new CreaOggetti(NomeFile);
+		
 	}
 
 }
