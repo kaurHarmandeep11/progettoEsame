@@ -7,9 +7,10 @@ import java.io.IOException;
 import java.util.*;
 //import com.google.gson.*;
 //import java.util.Collection;
-public class CreaOggetti {
+public class CreaOggetti implements Filter<LocaleMilano, Object>  {
 	
 	public List<LocaleMilano> lista = new ArrayList<>();
+	private FilterUtils<LocaleMilano> utils;
 	//public CreaOggetti json;
 	
 	
@@ -34,7 +35,9 @@ public class CreaOggetti {
                //crea un oggetto con i valori estratti
                 // Integer.parseInt(Dati[0]) fa il cast da string a int
                 //Double.parseDouble(Dati[6]); fa il cast da string a double
-            }/*
+            }
+          this.utils = new FilterUtils<LocaleMilano>();
+          /*
           for(LocaleMilano x:lista) {
         	  System.out.print(x.getID_NLS());
               System.out.print(x.getRIC());
@@ -56,6 +59,10 @@ public class CreaOggetti {
 
 	public List<LocaleMilano> getLista() {
 		return lista;
+	}
+//	@Override
+	public ArrayList<LocaleMilano> filterField(String fieldName, String operator, Object value) {
+		return (ArrayList<LocaleMilano>) utils.select(this.getLista(), fieldName, operator, value);	//seleziona elementi da filtrare
 	}
 
 }
