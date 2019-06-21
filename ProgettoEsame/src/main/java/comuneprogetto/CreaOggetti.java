@@ -1,5 +1,4 @@
 package comuneprogetto;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -7,14 +6,16 @@ import java.io.IOException;
 import java.util.*;
 //import com.google.gson.*;
 //import java.util.Collection;
-public class CreaOggetti implements Filter<LocaleMilano, Object>  {
+public class CreaOggetti/* implements Filter<LocaleMilano, Object> */ {
 	
-	public List<LocaleMilano> lista = new ArrayList<>();
-	private FilterUtils<LocaleMilano> utils;
+	public ArrayList<LocaleMilano> lista = new ArrayList<LocaleMilano>();
+//	private FilterUtils<LocaleMilano> utils;
 	//public CreaOggetti json;
-	
+	//ArrayList<Person> p = new ArrayList<Person>();
+	SuperLocale loc = new SuperLocale(lista);
 	
 	public CreaOggetti(String csvFile) {
+		System.out.print("all'interno di creaoggetti");
 		String line = "";
         String csvSplitBy = ";";
       //  int i = 0;
@@ -36,33 +37,32 @@ public class CreaOggetti implements Filter<LocaleMilano, Object>  {
                 // Integer.parseInt(Dati[0]) fa il cast da string a int
                 //Double.parseDouble(Dati[6]); fa il cast da string a double
             }
-          this.utils = new FilterUtils<LocaleMilano>();
-          /*
-          for(LocaleMilano x:lista) {
-        	  System.out.print(x.getID_NLS());
-              System.out.print(x.getRIC());
-              System.out.print(x.getINDIR_ORIG());
-              System.out.print(x.getDENOM_IMPRES());
-              System.out.print(x.getINSEGNA());
-              System.out.print(x.getINIZIO_ATT());
-              System.out.print(x.getgeo_y());
-              System.out.print(x.getgeo_x());
-              System.out.println();
-          }
-          */
-//          System.out.print(loc[340].getINSEGNA());  //questo è un test 
+          //filtro
+          ArrayList<LocaleMilano> pout = loc.filterField("INIZIO_ATT", "<", 1940.0);
+          System.out.print(pout);
+          
         } catch (IOException e) {
             e.printStackTrace();
         }
-              	
+      /*  ArrayList<LocaleMilano> pout = loc.filterField("INIZIO_ATT", "<", 1940.0);
+        System.out.print(pout);*/
         }
 
 	public List<LocaleMilano> getLista() {
 		return lista;
 	}
-//	@Override
-	public ArrayList<LocaleMilano> filterField(String fieldName, String operator, Object value) {
-		return (ArrayList<LocaleMilano>) utils.select(this.getLista(), fieldName, operator, value);	//seleziona elementi da filtrare
+	
+	/*public ArrayList<LocaleMilano> filtra(String fieldName, String operator, double value){
+		//ArrayList<LocaleMilano> pout = loc.filterField("INIZIO_ATT", "<", 1940.0);
+		ArrayList<LocaleMilano> pout = loc.filterField(fieldName, operator, value);
+        System.out.print(pout);
+        return pout;
+	}*/
+	
+	public ArrayList<LocaleMilano> filtra(String fieldName, String operator, double value){
+		//ArrayList<LocaleMilano> pout = loc.filterField("INIZIO_ATT", "<", 1940.0);
+		ArrayList<LocaleMilano> pout = loc.filterField(fieldName, operator, value);
+        System.out.print(pout);
+        return pout;
 	}
-
 }

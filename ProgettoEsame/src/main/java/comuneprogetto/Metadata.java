@@ -8,12 +8,12 @@ import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 
-public class MetaData {
+public class Metadata {
 	
 	private static final String COMMA_DELIMITER = ";";
 	private JSONArray metadata=new JSONArray();
 	
-	public MetaData() /*throws ClassNotFoundException, IOException*/ {
+	public Metadata() /*throws ClassNotFoundException, IOException*/ {
 		
 		try(BufferedReader br = new BufferedReader(new FileReader("Negozi_e_locali_storici_di_milano.csv"))){
 		//BufferedReader br = new BufferedReader(new FileReader("dataset.csv")); //file da leggere

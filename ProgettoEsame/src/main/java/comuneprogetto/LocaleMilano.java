@@ -1,5 +1,6 @@
 package comuneprogetto;
-public class LocaleMilano {
+
+public class LocaleMilano  {
 	private int ID_NLS;
 	private String RIC;
 	private String INDIR_ORIG;
@@ -12,6 +13,8 @@ public class LocaleMilano {
 	
 	public LocaleMilano(int ID_NLS, String RIC, String INDIR_ORIG, String DENOM_IMPRES, String INSEGNA,
 			int INIZIO_ATT, double geo_y, double geo_x/*, float location*/) { //costruttore
+		
+		super();
 		this.ID_NLS = ID_NLS;
 		this.RIC = RIC;
 		this.INDIR_ORIG = INDIR_ORIG;
