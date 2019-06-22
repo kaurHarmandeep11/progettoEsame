@@ -12,10 +12,10 @@ public class CreaOggetti/* implements Filter<LocaleMilano, Object> */ {
 //	private FilterUtils<LocaleMilano> utils;
 	//public CreaOggetti json;
 	//ArrayList<Person> p = new ArrayList<Person>();
-	SuperLocale loc = new SuperLocale(lista);
+	Locale loc = new Locale(lista);
 	
 	public CreaOggetti(String csvFile) {
-		System.out.print("all'interno di creaoggetti");
+		//System.out.print("all'interno di creaoggetti");
 		String line = "";
         String csvSplitBy = ";";
       //  int i = 0;
@@ -38,8 +38,8 @@ public class CreaOggetti/* implements Filter<LocaleMilano, Object> */ {
                 //Double.parseDouble(Dati[6]); fa il cast da string a double
             }
           //filtro
-          ArrayList<LocaleMilano> pout = loc.filterField("INIZIO_ATT", "<", 1940.0);
-          System.out.print(pout);
+       /*   ArrayList<LocaleMilano> pout = loc.filterField("INIZIO_ATT", "<", 1940.0);
+          System.out.print(pout);*/
           
         } catch (IOException e) {
             e.printStackTrace();
@@ -48,7 +48,7 @@ public class CreaOggetti/* implements Filter<LocaleMilano, Object> */ {
         System.out.print(pout);*/
         }
 
-	public List<LocaleMilano> getLista() {
+	public ArrayList<LocaleMilano> getLista() {
 		return lista;
 	}
 	
