@@ -13,10 +13,10 @@ Il progetto assegnato ha lo scopo di utilizzare un dataset su cui vengono gestit
 7. Gestione statistiche sui dati.
 
 # Funzionamento
-Il Programma si appoggia su un web server locale sulla porta 8080 per soddisfare le specifiche richieste dall'utente.Utilizzando POSTMAN Tramite la:
-"GET /metadata/" vengono visualizzati i metadati.
-"GET /data/"  restituisce intero dataset in json.
-"GET /data?filter={} restituisce un data specifico.
-"GET /stats?field={} restituisce le statistiche applicate.
+- Il Programma si appoggia su un web server locale sulla porta 8080 per soddisfare le specifiche richieste dall'utente.Utilizzando POSTMAN Tramite la:
+- "GET /metadata/" vengono visualizzati i metadati.
+- "GET /data/"  restituisce intero dataset in json.
+- "GET /data?filter={} restituisce un data specifico.
+- "GET /stats?field={} restituisce le statistiche applicate.
 
 # Diagramma UML
