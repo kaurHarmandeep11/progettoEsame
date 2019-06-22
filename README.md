@@ -35,3 +35,4 @@ Il progetto contiene le classi:
 -Filter.java e FilterUtils.java: Per la realizzazione dei filtri.
 
 # Diagramma UML
+https://github.com/kaurHarmandeep11/progettoEsame/blob/master/uml.gif
