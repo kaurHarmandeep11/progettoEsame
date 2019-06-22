@@ -1,4 +1,4 @@
-# progettoEsame.
+# ProgettoEsame.
 Progetto d'esame del 25 giugno 2019 di Programmazione oggetti.Ingegneria informatica e dell'Automazione, 2° anno.Realizzato da Kaur Harmandeep e Nociaro Igor.
 
 # Introduzione
@@ -18,5 +18,20 @@ Il progetto assegnato ha lo scopo di utilizzare un dataset su cui vengono gestit
 - "GET /data/"  restituisce intero dataset in json.
 - "GET /data?filter={} restituisce un data specifico.
 - "GET /stats?field={} restituisce le statistiche applicate.
+
+# Struttura Progetto
+Il progetto contiene le classi: 
+-Download.java che effettua il parsing del dataset.
+-Metadata.java: Seeparazione dei dati tramite "Comma_Delimiter".
+
+-Handler.java: Per utilizzo di @GetMapping.
+
+-LocaleMilano.java: la classe e il costruttore
+-Locale.java: implementa "Locale.java".
+-SuperLocale.java: Applicazione filtro alla classe "LocaleMilano.java".
+
+-CreaOggetti.java: Crea la lista degli Oggetti di "LocaleMilano.java".
+
+-Filter.java e FilterUtils.java: Per la realizzazione dei filtri.
 
 # Diagramma UML
