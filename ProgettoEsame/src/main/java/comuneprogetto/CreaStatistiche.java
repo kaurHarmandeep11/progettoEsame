@@ -7,7 +7,6 @@ public class CreaStatistiche {
 	
 	public CreaStatistiche(ArrayList<LocaleMilano> lista,String campo) {
 		if(campo.equals("ID_NLS")||campo.equals("INIZIO_ATT")||campo.equals("GEO_X")||campo.equals("GEO_Y")) {
-			//todo statistche numeriche
 			//average
 			double totalAmount = 0;
 			double temp = 0;
@@ -51,4 +50,5 @@ public class CreaStatistiche {
 	public ArrayList<Statistiche> getstats(){
 		return listastat;
 	}
+
 }

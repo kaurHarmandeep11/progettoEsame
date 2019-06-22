@@ -22,7 +22,7 @@ public class Handler { //handling incoming web requests
 	}
 	
 	//@RequestMapping(path="/data", method = RequestMethod.GET, headers="Accept=application/json; charset=utf-8")
-	@GetMapping("/datatot")
+	@GetMapping("/data")
 	public ArrayList<LocaleMilano> GetData() throws FileNotFoundException, IOException //stampa tutti i dati del dataset in formato json
 	{
 		CreaOggetti Lista = new CreaOggetti("Negozi_e_locali_storici_di_milano.csv"); //da cambiare?
@@ -50,7 +50,7 @@ public class Handler { //handling incoming web requests
 		//System.out.println("Requested book " + id +""+ id2);
 	} */
 	
-	@GetMapping("/data")
+	@GetMapping("/data/filtra")
 	public ArrayList<LocaleMilano> datafiltrata(@RequestParam("filter") String filtro)  //problema con []
 	{
 		//scomporre il filtro ??  esempio {"field" : {"$not" : val}}
@@ -80,15 +80,7 @@ public class Handler { //handling incoming web requests
 		CreaOggetti Lista = new CreaOggetti("Negozi_e_locali_storici_di_milano.csv"); //da cambiare?
 		return Lista.filtra(A[0], A[1], Double.parseDouble(A[2]));
 	}
-	
-	/*@GetMapping("/datastat")
-	public String Getstats(@RequestParam("field") String campo,@RequestParam("stat") String stat)
-	{ // es /datastat?field=INIZIO_ATT&stat=avg
-		CreaOggetti Lista = new CreaOggetti("Negozi_e_locali_storici_di_milano.csv"); //da cambiare?
-		return Lista.statistiche(campo,stat);
-	}*/
-	
-	@GetMapping("/datastat")
+	@GetMapping("/data/stat")
 	public ArrayList<Statistiche> statistics(@RequestParam("field") String campo)
 	{
 		String Campo = campo.toUpperCase();
@@ -99,8 +91,37 @@ public class Handler { //handling incoming web requests
 		
 		CreaStatistiche stats = new CreaStatistiche(Lista.getLista(),Campo); //se gli passo la lista filtrata?
 		//ArrayList al1 = (ArrayList) stats;
+		return stats.getstats();  //da statistiche a lista? 
+
+	}
+	
+	@GetMapping("/data/stat/filtra")
+	public ArrayList<Statistiche> filtrastat(@RequestParam("field") String campo,@RequestParam("filter") String filtro)
+	{
+		//es /data/stat/filtra?field=INIZIO_ATT&filter={"geo_x":{"$gte": 30}}   fa la statistica di inizio_att di tutti i record con geo_x >= 30
+		String Campo = campo.toUpperCase();
+		
+		System.out.println("filtro passato " + filtro);
+		String[] parts = filtro.split("\\W");        //ogni non-word character,il dash (_) è considerato carattere
+		int i = 0;
+		String A[] = {"","","",""};
+		for(String x: parts) {
+			if(!x.equals("")) {
+				System.out.println("part : " + x);
+				switch(x) {
+				case "not": A[i]= "!="; break;
+				case "gt": A[i]= ">"; break;
+				case "lt": A[i]= "<"; break;
+				case "gte": A[i]= ">="; break;
+				case "lte": A[i]= "<="; break;
+				default : A[i] = x; break;
+				}		
+				i++;
+			}
+		}
+		CreaOggetti Lista = new CreaOggetti("Negozi_e_locali_storici_di_milano.csv"); //da cambiare?
+		CreaStatistiche stats = new CreaStatistiche(Lista.filtra(A[0], A[1], Double.parseDouble(A[2])),Campo); 
 		return stats.getstats();  //da statistiche a lista?
-				//Lista.filtra(campo, "<", 1900.0);
 
 	} 
 	

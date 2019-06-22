@@ -38,7 +38,4 @@ public class Statistiche {
 	public int getcount() {
 		return count;
 	}
-	/*public ArrayList<Statistiche> listastats(Statistiche s){
-		
-	}*/
 }
