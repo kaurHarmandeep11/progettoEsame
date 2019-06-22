@@ -7,16 +7,20 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-
+/**
+ * Classe utile per la creazione di metadata
+ * @author Igor Nociaro
+ * @author Harmandeep Kaur
+ * @version 1.0
+ */
 public class Metadata {
 	
 	private static final String COMMA_DELIMITER = ";";
 	private JSONArray metadata=new JSONArray();
 	
-	public Metadata() /*throws ClassNotFoundException, IOException*/ {
+	public Metadata() {
 		
-		try(BufferedReader br = new BufferedReader(new FileReader("Negozi_e_locali_storici_di_milano.csv"))){
-		//BufferedReader br = new BufferedReader(new FileReader("dataset.csv")); //file da leggere
+	try(BufferedReader br = new BufferedReader(new FileReader("Negozi_e_locali_storici_di_milano.csv"))){
 		Class c = Class.forName("comuneprogetto.LocaleMilano"); //classe scelta
 		Constructor listaCostruttori[] = c.getConstructors();  //ottiene lista dei costruttori
 		Field listaParam[] = c.getDeclaredFields();			//ottiene lista degli attributi
@@ -26,8 +30,7 @@ public class Metadata {
 		line = br.readLine(); 	//legge la prima riga del dataset in modo da ricavarne i titoli
 		String[] valori = line.split(COMMA_DELIMITER,14); 
 		//inserisco i dati raccolti in un array json
-		for (int j=0; j < listaParam.length; j++)
-		{   
+		for (int j=0; j < listaParam.length; j++){   
 			JSONObject obj = new JSONObject();
 			Field campoCorrente = listaParam[j];
 			//crea un oggetto con i parametri alias type e nome a cui andiamo ad aggiungere i valori presi
@@ -39,8 +42,9 @@ public class Metadata {
 			metadata.add(obj);   						//aggiungo di volta in volta l'oggetto all'Array json
 		}
 	}catch (IOException e) {e.printStackTrace();}
-	 catch (ClassNotFoundException e) {e.printStackTrace();}
+	catch (ClassNotFoundException e) {e.printStackTrace();}
 	}
+	
 	public JSONArray getMetadata() {
 		return metadata;
 	}

@@ -4,7 +4,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
-
+/**
+ * @author Igor Nociaro
+ * @author Harmandeep Kaur
+ * @version 1.0
+ */
 public class FilterUtils<T> {
 	public static boolean check(Object value, String operator, Object th) {
 		if (th instanceof Number && value instanceof Number) {	

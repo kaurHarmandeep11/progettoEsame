@@ -1,10 +1,19 @@
 package comuneprogetto;
 
 import java.util.ArrayList;
-
+/**
+ * Classe che crea le statistiche e le mette in una lista
+ * @author Igor Nociaro
+ * @author Harmandeep Kaur
+ * @version 1.0
+ */
 public class CreaStatistiche {
 	public ArrayList<Statistiche> listastat = new ArrayList<Statistiche>();
-	
+	/**
+	 * 
+	 * @param lista è la lista di{@link LocaleMilano} che può essere intera o filtrata precedentemente
+	 * @param campo nome del campo dove fare statistiche
+	 */
 	public CreaStatistiche(ArrayList<LocaleMilano> lista,String campo) {
 		if(campo.equals("ID_NLS")||campo.equals("INIZIO_ATT")||campo.equals("GEO_X")||campo.equals("GEO_Y")) {
 			//average
@@ -46,7 +55,10 @@ public class CreaStatistiche {
 			//todo elementi unici e occorrenze
 		}
 	}
-	
+	/**
+	 * Fornisce le statistiche 
+	 * @return Statistiche in formato ArrayList
+	 */
 	public ArrayList<Statistiche> getstats(){
 		return listastat;
 	}

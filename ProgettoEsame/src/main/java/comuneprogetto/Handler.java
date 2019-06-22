@@ -1,6 +1,6 @@
 package comuneprogetto;
 
-//import org.springframework.boot.*;
+
 import org.springframework.boot.autoconfigure.*;
 import org.springframework.web.bind.annotation.*;
 import org.json.simple.JSONArray;
@@ -8,58 +8,58 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+/**
+ * Gestisce le richieste in entrata dal web
+ * @author Igor Nociaro
+ * @author Harmandeep Kaur
+ * @version 1.0
+ */
 
 @RestController
 @EnableAutoConfiguration
-
 public class Handler { //handling incoming web requests	
-	
-
 	
 	@RequestMapping("/")
 	String home() {  
 		return "Hello World!";  //viene visualizzato in localhost:8080 sul browser
 	}
-	
-	//@RequestMapping(path="/data", method = RequestMethod.GET, headers="Accept=application/json; charset=utf-8")
+	/**
+	 * Visualizza tutti i dati del dataset su localhost:8080/data
+	 * @return lista dati da {@link CreaOggetti}
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	@GetMapping("/data")
 	public ArrayList<LocaleMilano> GetData() throws FileNotFoundException, IOException //stampa tutti i dati del dataset in formato json
 	{
-		CreaOggetti Lista = new CreaOggetti("Negozi_e_locali_storici_di_milano.csv"); //da cambiare?
+		CreaOggetti Lista = new CreaOggetti(); 
 		return Lista.getLista();
 	}
-	
+	/**
+	 * Visualizza i metadati del dataset su localhost:8080/metadata
+	 * @return lista metadata creata con {@link Metadata}
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	@GetMapping("/metadata")
-	//stampa metadata in formato json
 	public JSONArray GetMetadata() throws FileNotFoundException, IOException, ClassNotFoundException
 	{
 		Metadata metadata = new Metadata(); //\ufeffID_NLS?
 		return metadata.getMetadata();
 	}
-	
-	
-/*	@GetMapping("/data")
-	public ArrayList<LocaleMilano> dataconparametro(@RequestParam("field") String campo,@RequestParam("filter") String filtro)
-	{
-		//scomporre il filtro ??  esempio {"field" : {"$not" : val}}
-		//esempio di filtro: http://localhost:8080/data?field=INIZIO_ATT&op=<&num
-		CreaOggetti Lista = new CreaOggetti("Negozi_e_locali_storici_di_milano.csv"); //da cambiare?
-		System.out.println("campo passato" + campo);
-		//String temp = campo;
-		return Lista.filtra(campo, "<", 1900.0);
-		//System.out.println("Requested book " + id +""+ id2);
-	} */
-	
+	/**
+	 * Visualizza i dati filtrati del dataset su localhost:8080/data/filtra
+	 * @param filtro es  http://localhost:8080/data?filter={"field" : {"$gt" : val}}
+	 * @return lista filtrata
+	 */
 	@GetMapping("/data/filtra")
-	public ArrayList<LocaleMilano> datafiltrata(@RequestParam("filter") String filtro)  //problema con []
+	public ArrayList<LocaleMilano> datafiltrata(@RequestParam("filter") String filtro)  
 	{
-		//scomporre il filtro ??  esempio {"field" : {"$not" : val}}
-		//esempio di filtro: http://localhost:8080/data?field={"field" : {"$not" : val}}
-		//usare String split?
 		System.out.println("filtro passato " + filtro);
+		//problema con []
 		//https://programmer.help/blogs/characters-are-defined-in-rfc-7230-and-rfc-3986.html 
 		//https://stackoverflow.com/questions/41053653/tomcat-8-is-not-able-to-handle-get-request-with-in-query-parameters/51212677#51212677
-		//String split = "\\{|\\}|\"|:|\\[|\\]|,";
 		String[] parts = filtro.split("\\W");        //ogni non-word character,il dash (_) è considerato carattere
 		int i = 0;
 		String A[] = {"","","",""};
@@ -77,30 +77,35 @@ public class Handler { //handling incoming web requests
 				i++;
 			}
 		}
-		CreaOggetti Lista = new CreaOggetti("Negozi_e_locali_storici_di_milano.csv"); //da cambiare?
+		CreaOggetti Lista = new CreaOggetti(); 
 		return Lista.filtra(A[0], A[1], Double.parseDouble(A[2]));
 	}
+	/**
+	 * Visualizza le statistiche di un determinato campo su localhost:8080/data/stat
+	 * @param campo es http://localhost:8080/data?field=INIZIO_ATT
+	 * @return lista statistiche da {@link CreaStatistiche}
+	 */
 	@GetMapping("/data/stat")
 	public ArrayList<Statistiche> statistics(@RequestParam("field") String campo)
 	{
 		String Campo = campo.toUpperCase();
-		//se RIC,INDIR_ORIG,DENOM_IMPRES,INSEGNA ---> conteggio elementi unici
-		//se ID_NLS,INIZIO_ATT,GEO_X,GEO_Y ---> avg,min,max,sum,count,devstd
-		CreaOggetti Lista = new CreaOggetti("Negozi_e_locali_storici_di_milano.csv"); //da cambiare?
-		//System.out.println("campo passato" + campo);
-		
-		CreaStatistiche stats = new CreaStatistiche(Lista.getLista(),Campo); //se gli passo la lista filtrata?
-		//ArrayList al1 = (ArrayList) stats;
-		return stats.getstats();  //da statistiche a lista? 
+		CreaOggetti Lista = new CreaOggetti();		
+		CreaStatistiche stats = new CreaStatistiche(Lista.getLista(),Campo); 
+		return stats.getstats();  
 
 	}
-	
+	/**
+	 * Visualizza le statistiche di un campo filtrato su localhost:8080/data/stat/filtra
+	 * @param campo
+	 * @param filtro
+	 * es http://localhost:8080/data/stat/filtra?field=INIZIO_ATT&filter={"geo_x":{"$gte": 30}}
+	 * fa la statistica di inizio_att di tutti i record con geo_x >= 30
+	 * @return lista statistiche filtrata 
+	 */
 	@GetMapping("/data/stat/filtra")
 	public ArrayList<Statistiche> filtrastat(@RequestParam("field") String campo,@RequestParam("filter") String filtro)
 	{
-		//es /data/stat/filtra?field=INIZIO_ATT&filter={"geo_x":{"$gte": 30}}   fa la statistica di inizio_att di tutti i record con geo_x >= 30
 		String Campo = campo.toUpperCase();
-		
 		System.out.println("filtro passato " + filtro);
 		String[] parts = filtro.split("\\W");        //ogni non-word character,il dash (_) è considerato carattere
 		int i = 0;
@@ -119,9 +124,9 @@ public class Handler { //handling incoming web requests
 				i++;
 			}
 		}
-		CreaOggetti Lista = new CreaOggetti("Negozi_e_locali_storici_di_milano.csv"); //da cambiare?
+		CreaOggetti Lista = new CreaOggetti();
 		CreaStatistiche stats = new CreaStatistiche(Lista.filtra(A[0], A[1], Double.parseDouble(A[2])),Campo); 
-		return stats.getstats();  //da statistiche a lista?
+		return stats.getstats();  
 
 	} 
 	

@@ -1,6 +1,12 @@
 package comuneprogetto;
-
+/**
+ * Uno dei Locali creati dalla classe {@link CreaOggetti}
+ * @author Igor Nociaro
+ * @author Harmandeep Kaur
+ * @version 1.0
+ */
 public class LocaleMilano  {
+	//Attributi
 	private int ID_NLS;
 	private String RIC;
 	private String INDIR_ORIG;
@@ -9,10 +15,19 @@ public class LocaleMilano  {
 	private int INIZIO_ATT;
 	private double geo_y;
 	private double geo_x;
-	//private float location;
-	
+	//Metodi
+	/**
+	 * @param ID_NLS ID locale
+	 * @param RIC Tipo di locale
+	 * @param INDIR_ORIG Indirizzo del locale
+	 * @param DENOM_IMPRES Denominazione del locale
+	 * @param INSEGNA Insegna
+	 * @param INIZIO_ATT Anno di inizio attività
+	 * @param geo_y Posizione y locale
+	 * @param geo_x Posizione x locale
+	 */
 	public LocaleMilano(int ID_NLS, String RIC, String INDIR_ORIG, String DENOM_IMPRES, String INSEGNA,
-			int INIZIO_ATT, double geo_y, double geo_x/*, float location*/) { //costruttore
+			int INIZIO_ATT, double geo_y, double geo_x) { //costruttore
 		
 		super();
 		this.ID_NLS = ID_NLS;
@@ -23,9 +38,10 @@ public class LocaleMilano  {
 		this.INIZIO_ATT = INIZIO_ATT;
 		this.geo_x = geo_x;
 		this.geo_y = geo_y;
-		//this.location = location;
 	}
-	
+	/**
+	 * getter
+	 */
 	public int getID_NLS() {
 		return ID_NLS;
 	}
@@ -57,7 +73,5 @@ public class LocaleMilano  {
 	public double getgeo_x() {
 		return geo_x;
 	}
-/*	public String getlocation() {
-		//?se serve unire i double in uno string?
-	}*/
+
 }

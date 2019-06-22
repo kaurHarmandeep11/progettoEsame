@@ -1,15 +1,28 @@
 package comuneprogetto;
-//import java.util.ArrayList;
 
+/**
+ * Una delle statistiche create da {@link CreaStatististiche}
+ * @author Igor Nociaro
+ * @author Harmandeep Kaur
+ * @version 1.0
+ */
 public class Statistiche {
-	
-	
+	//Attributi
 	private double avg;
 	private double min;
 	private double max;
 	private double dev_std;
 	private double sum;
 	private int count;
+	//Metodi
+	/**
+	 * @param avg Media
+	 * @param min Minimo
+	 * @param max Massimo
+	 * @param dev_std Deviazione standard
+	 * @param sum Somma
+	 * @param count Conta
+	 */
 	public Statistiche (double avg,double min,double max,double dev_std,double sum,int count) { //come fare per elementi unici e occorrenze?
 		this.avg = avg;
 		this.min = min;
@@ -19,7 +32,9 @@ public class Statistiche {
 		this.count = count;
 		
 	}
-	
+	/**
+	 * getter
+	 */
 	public double getavg() {
 		return avg;
 	}

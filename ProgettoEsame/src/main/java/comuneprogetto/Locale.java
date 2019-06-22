@@ -2,6 +2,13 @@ package comuneprogetto;
 
 import java.util.ArrayList;
 
+/**
+ * Applica filtri a LocaleMilano
+ * @author Igor Nociaro
+ * @author Harmandeep Kaur
+ * @version 1.0
+ */
+
 public class Locale implements Filter<LocaleMilano, Object> {
 	private ArrayList<LocaleMilano> Locale;
 	private FilterUtils<LocaleMilano> utils;
@@ -17,7 +24,9 @@ public class Locale implements Filter<LocaleMilano, Object> {
 		this.Locale = Locale;
 		this.utils = new FilterUtils<LocaleMilano>();
 	}
-
+    /**
+     * getter and setter
+     */
 	public ArrayList<LocaleMilano> getlocale() {
 		return Locale;
 	}
